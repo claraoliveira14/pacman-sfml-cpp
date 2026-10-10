@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
+#include <string>
 
 char mapa[15][31] = {
     "111111111111112311111111111111",
@@ -25,7 +26,6 @@ const float SIZE = 50;  //tamanho da largura dos blocos para calculos
 int placar = 0;         //variavel para contar pontos
 
 float posx = 720, posy = 115;   // posicao do personagem (começa no meio do mapa)
-
 
 struct Inimigo {
     float x, y;
@@ -86,12 +86,14 @@ bool Movendo = false;   // verifica se o personagem está atualmente se movendo
 
 int main() {
     // cria a janela
-    
     sf::RenderWindow window(sf::VideoMode({1500, 750}), "Minha janela");
+
+    // Adicionamos uma string constante para facilitar caso o caminho mude no futuro
+    std::string caminho = "Imagens_Fontes/Imagens_Codigo_fonte/";
 
     //********** TEXTOS ************//
     sf::Font font;  //escolhendo fonte
-    if (!font.openFromFile("fontejogo.ttf")) {
+    if (!font.openFromFile(caminho + "fontejogo.ttf")) {
         std::cout << "Erro lendo fonte fontejogo.ttf\n";
         return 0;
     }
@@ -117,61 +119,61 @@ int main() {
     //PERSONAGEM
     // personagem vista de frente
     sf::Texture texparada;
-    if (!texparada.loadFromFile("frente.png")) {
+    if (!texparada.loadFromFile(caminho + "frente.png")) {
         std::cout << "Erro lendo imagem frente.png\n";
         return 0;
     }
     // personagem vista da direita
     sf::Texture texDireita;
-    if (!texDireita.loadFromFile("direita.png")) {
+    if (!texDireita.loadFromFile(caminho + "direita.png")) {
         std::cout << "Erro lendo direita.png\n";
         return 0;
-}   
+    }   
     // personagem vista da esquerda
     sf::Texture texEsquerda;
-    if (!texEsquerda.loadFromFile("esquerda.png")) {
+    if (!texEsquerda.loadFromFile(caminho + "esquerda.png")) {
         std::cout << "Erro lendo esquerda.png\n";
         return 0;
-}
+    }
     // personagem vista de trás
     sf::Texture texTras;
-    if (!texTras.loadFromFile("tras.png")) {
-        std::cout << "Erro lendo tras60.png\n";
+    if (!texTras.loadFromFile(caminho + "tras.png")) {
+        std::cout << "Erro lendo tras.png\n";
         return 0;
-}
+    }
     //qual 'roupa' o personagem começa utilizando
     sf::Sprite personagem{texparada};
 
     //INIMIGOS
     sf::Texture jacparado;
-    if (!jacparado.loadFromFile("jacarefrente.png")) {
+    if (!jacparado.loadFromFile(caminho + "jacarefrente.png")) {
         std::cout << "Erro lendo imagem jacarefrente.png\n";
         return 0;
     }
     //direita
     sf::Texture jacDireita;
-    if (!jacDireita.loadFromFile("direita.png")) {
+    if (!jacDireita.loadFromFile(caminho + "direita.png")) {
         std::cout << "Erro lendo direita.png\n";
         return 0;
-}   
+    }   
     //esquerda
     sf::Texture jacEsquerda;
-    if (!jacEsquerda.loadFromFile("jacareesquerda.png")) {
+    if (!jacEsquerda.loadFromFile(caminho + "jacareesquerda.png")) {
         std::cout << "Erro lendo esquerda.png\n";
         return 0;
-}
+    }
     //trás
     sf::Texture jacTras;
-    if (!jacTras.loadFromFile("jacaretras.png")) {
+    if (!jacTras.loadFromFile(caminho + "jacaretras.png")) {
         std::cout << "Erro lendo jacaretras.png\n";
         return 0;
-}
+    }
     //qual 'roupa' o jacaré começa utilizando
     sf::Sprite jacare{jacparado};
     
     //PAREDES
     sf::Texture paredes;
-    if(!paredes.loadFromFile("agoravai.png")) {
+    if(!paredes.loadFromFile(caminho + "agoravai.png")) {
         std::cout << "Erro lendo paredes.png\n";
         return 0;
     }
@@ -180,49 +182,49 @@ int main() {
     //COMIDAS
     // 2 = hamburguer, 3 = bolo de morango, 4 = macarrão, 5 = bolo de chocolate, 6 = donut, 7 = hotdog, 8 = ovo frito.
     sf::Texture comidas2;
-    if(!comidas2.loadFromFile("burger.png")){
+    if(!comidas2.loadFromFile(caminho + "burger.png")){
         std::cout << "Erro lendo burguer.png\n";
         return 0;
     }
     sf::Sprite comida2{comidas2};
 
     sf::Texture comidas3;
-    if(!comidas3.loadFromFile("strawberrycake.png")){
+    if(!comidas3.loadFromFile(caminho + "strawberrycake.png")){
         std::cout << "Erro lendo strawberrycake.png\n";
         return 0;
     }
     sf::Sprite comida3{comidas3};
 
     sf::Texture comidas4;
-    if(!comidas4.loadFromFile("spaghetti.png")){
+    if(!comidas4.loadFromFile(caminho + "spaghetti.png")){
         std::cout << "Erro lendo spaghetti.png\n";
         return 0;
     }
     sf::Sprite comida4{comidas4};
 
     sf::Texture comidas5;
-    if(!comidas5.loadFromFile("chocolatecake.png")){
+    if(!comidas5.loadFromFile(caminho + "chocolatecake.png")){
         std::cout << "Erro lendo chocolatecake.png\n";
         return 0;
     }
     sf::Sprite comida5{comidas5};
 
     sf::Texture comidas6;
-    if(!comidas6.loadFromFile("donut.png")){
+    if(!comidas6.loadFromFile(caminho + "donut.png")){
         std::cout << "Erro lendo donut.png\n";
         return 0;
     }
     sf::Sprite comida6{comidas6};
 
     sf::Texture comidas7;
-    if(!comidas7.loadFromFile("hotdog.png")){
+    if(!comidas7.loadFromFile(caminho + "hotdog.png")){
         std::cout << "Erro lendo hotdog.png\n";
         return 0;
     }
     sf::Sprite comida7{comidas7};
 
     sf::Texture comidas8;
-    if(!comidas8.loadFromFile("friedegg.png")){
+    if(!comidas8.loadFromFile(caminho + "friedegg.png")){
         std::cout << "Erro lendo friedegg.png\n";
         return 0;
     }
@@ -232,7 +234,6 @@ int main() {
 
     //********** RELOGIO ************//
     sf::Clock clock;
-
 
     //********* MOVIMENTOS ************//
     // executa o programa enquanto a janela está aberta
@@ -266,7 +267,6 @@ int main() {
                         baixo = true;   // down key: personagem tem intenção de se mover para baixo
                         esq = dir = cima = false; // down key: move o personagem para baixo
                   }
-                  
             }
         }
 
